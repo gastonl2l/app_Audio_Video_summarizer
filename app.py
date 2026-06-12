@@ -164,7 +164,7 @@ if uploaded_file is not None:
 
     
 
-    # 🔥 NOWY UPLOAD → usuń stare temp pliki
+    # NOWY UPLOAD → usuń stare temp pliki
     if st.session_state.last_file and st.session_state.last_file != current_file_id:
         cleanup_temp_files(
             st.session_state.get("temp_input_path"),
@@ -208,6 +208,17 @@ if uploaded_file is not None:
     
     with open(temp_input_path, "wb") as f:
         f.write(uploaded_file.getbuffer())
+
+    # Podgląd
+    file_extension = uploaded_file.name.split(".")[-1].lower()
+    is_video = file_extension in ["mp4", "avi", "mov"]
+    is_audio = file_extension in ["mp3", "wav", "m4a"]
+
+    if is_video:
+        st.video(uploaded_file)
+
+    elif is_audio:
+        st.audio(uploaded_file)
 
     estimated_cost = estimate_cost(temp_input_path)
     if estimated_cost is None:
