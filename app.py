@@ -283,6 +283,7 @@ if uploaded_file is not None:
             confirm_cost_dialog(estimated_cost)
 
         st.stop()
+
     
         
     # Rozpoznawanie rozszerzenia pliku
@@ -290,11 +291,7 @@ if uploaded_file is not None:
     is_video = file_extension in ["mp4", "avi", "mov"]
     is_audio = file_extension in ["mp3", "wav", "m4a"]
 
-    # Podgląd pliku
-    if is_video:
-        st.video(temp_input_path)
-    elif is_audio:
-        st.audio(temp_input_path)
+    
     
     try:
         # 2. Wyodrębnianie audio (jeśli to wideo) lub przygotowanie pliku audio
